@@ -7,6 +7,8 @@ public class Movement : MonoBehaviour
 {
     Rigidbody2D rb;
 
+    public GameObject ItemHeld;
+
     [SerializeField] Transform groundCheck;
 
     [SerializeField] LayerMask ground;
@@ -50,6 +52,10 @@ public class Movement : MonoBehaviour
         if(isGrounded()){
             jumps = maxExtraJumps;
         }
+
+          if(Input.GetButtonDown("Fire1") && ItemHeld != null){
+            print("HI");
+            }
     }
 
     void Jump(){
@@ -59,6 +65,7 @@ public class Movement : MonoBehaviour
     {
         return Physics2D.OverlapCircle(groundCheck.position, 0.1f, ground);
     }
+
 
  
 }
