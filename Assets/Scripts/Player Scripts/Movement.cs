@@ -55,6 +55,7 @@ public class Movement : MonoBehaviour
 
           if(Input.GetButtonDown("Fire1") && ItemHeld != null){
             print("HI");
+            StartCoroutine(eatItem());
             }
     }
 
@@ -64,6 +65,17 @@ public class Movement : MonoBehaviour
     bool isGrounded()
     {
         return Physics2D.OverlapCircle(groundCheck.position, 0.1f, ground);
+    }
+
+    IEnumerator eatItem(){
+        ItemHeld.GetComponent<SpriteRenderer>().enabled = false;
+        ItemHeld.GetComponent<item>().removeEffect(gameObject);
+        ItemHeld.GetComponent<item>().giveSuperEffect(gameObject);
+        yield return new WaitForSeconds(5);
+        ItemHeld.GetComponent<item>().removeSuperEffect(gameObject);
+        Destroy(ItemHeld);
+        ItemHeld = null;
+        
     }
 
 

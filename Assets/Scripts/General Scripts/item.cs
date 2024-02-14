@@ -34,23 +34,23 @@ public class item : MonoBehaviour
     //     gb.GetComponent<Movement>().movementSpeed /=3;
     // }
 
-    void giveEffect(GameObject gb){
+    public void giveEffect(GameObject gb){
         gb.GetComponent<Movement>().movementSpeed *=3;
 
     }
 
-    void removeEffect(GameObject gb){
+    public void removeEffect(GameObject gb){
         gb.GetComponent<Movement>().movementSpeed /=3;
 
 
     }
 
-    void giveSuperEffect(GameObject gb){
+   public  void giveSuperEffect(GameObject gb){
         gb.GetComponent<Movement>().movementSpeed *=6;
 
     }
 
-    void removeSuperEffect(GameObject gb){
+    public void removeSuperEffect(GameObject gb){
         gb.GetComponent<Movement>().movementSpeed /=6;
 
     }
