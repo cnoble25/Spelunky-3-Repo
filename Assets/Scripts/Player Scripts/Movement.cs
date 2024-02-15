@@ -69,10 +69,10 @@ public class Movement : MonoBehaviour
 
     IEnumerator eatItem(){
         ItemHeld.GetComponent<SpriteRenderer>().enabled = false;
-        ItemHeld.GetComponent<item>().removeEffect(gameObject);
-        ItemHeld.GetComponent<item>().giveSuperEffect(gameObject);
+        ItemHeld.SendMessage("removeEffect", gameObject);
+        ItemHeld.SendMessage("giveSuperEffect", gameObject);
         yield return new WaitForSeconds(5);
-        ItemHeld.GetComponent<item>().removeSuperEffect(gameObject);
+        ItemHeld.SendMessage("removeSuperEffect", gameObject);
         Destroy(ItemHeld);
         ItemHeld = null;
         

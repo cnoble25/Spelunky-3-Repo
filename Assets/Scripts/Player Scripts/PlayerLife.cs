@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class PlayerLife : MonoBehaviour
 {
-  private void OnCollisionEnter(Collision collision) 
+  private void OnCollisionEnter2D(Collision2D collision) 
     {
         if (collision.gameObject.CompareTag("Enemy Body"))
         {
@@ -16,8 +16,8 @@ public class PlayerLife : MonoBehaviour
 
      void Die()
     {
-        GetComponent<MeshRenderer>().enabled = false;
-        GetComponent<Rigidbody>().isKinematic = true;
+        GetComponent<BoxCollider2D>().enabled = false;
+        GetComponent<Rigidbody2D>().isKinematic = true;
         GetComponent<Movement>().enabled = false;
         Invoke(nameof(ReloadLevel), 1.3f);
     }

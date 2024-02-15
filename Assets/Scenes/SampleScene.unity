@@ -136,6 +136,7 @@ GameObject:
   - component: {fileID: 34695443}
   - component: {fileID: 34695442}
   - component: {fileID: 34695446}
+  - component: {fileID: 34695447}
   m_Layer: 0
   m_Name: Test Item
   m_TagString: Movement Faster
@@ -259,6 +260,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6450202105001449b4cd4b225b48847, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rb: {fileID: 0}
+--- !u!114 &34695447
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 34695441}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e290bf417c748bf429b453bd3543083f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb: {fileID: 0}
 --- !u!1 &374738111
 GameObject:
   m_ObjectHideFlags: 0
@@ -446,7 +461,7 @@ MonoBehaviour:
     m_Bits: 64
   maxExtraJumps: 3
   sprintSpeed: 1
-  movementSpeed: 3
+  movementSpeed: 6
   jumpForce: 20
 --- !u!114 &469157002
 MonoBehaviour:
@@ -513,7 +528,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 9.327923
+  orthographic size: 6.30631
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
