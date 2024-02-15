@@ -4,79 +4,81 @@ using UnityEngine;
 
 public class DonutStar : item
 {
-   // Rigidbody2D rb;
+    //Rigidbody2D rb;
+    float velocityX = 0;
+    GameObject playergb;
 
     bool isThrown = false;
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        rb.isKinematic = false;
+        rb.isKinematic = true;
     }
     private void Update()
     {
         if (isThrown)
         {
-
             transform.parent = null;
             rb.isKinematic = false;
-          
+            if(playergb != null){
+            if(velocityX == 0){
+                velocityX = playergb.GetComponent<Movement>().rb.velocity.x;
+            }
+            if(velocityX >= 0){
             rb.velocity = new Vector2(15f, rb.velocity.y);
-          
+            }else{
+            rb.velocity = new Vector2(-15f, rb.velocity.y);
+            }
+            print(playergb.GetComponent<Movement>().rb.velocity);
+            }
         }
         else
         {
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y);
             rb.isKinematic = true;
+            velocityX = 0;
         }
     }
 
      new void giveEffect(GameObject gb)
     {
         gb.GetComponent<Movement>().movementSpeed *= 3;
-
     }
 
      new void removeEffect(GameObject gb)
     {
         gb.GetComponent<Movement>().movementSpeed /= 3;
-        print("gey");
-
-
     }
 
      new void giveSuperEffect(GameObject gb)
     {
         gb.GetComponent<Movement>().movementSpeed *= 6;
-
     }
 
      new void removeSuperEffect(GameObject gb)
     {
         gb.GetComponent<Movement>().movementSpeed /= 6;
-
     }
 
      new void Throw(GameObject gb)
     {
         isThrown = true;
         StartCoroutine(returnHitbox());
-
-
     }
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-
         Debug.Log(collision);
         if (collision.gameObject.CompareTag("player"))
         {
             // StartCoroutine(TempSpeedBuff(collision.gameObject));
             gameObject.transform.SetParent(collision.transform);
-            //gameObject.transform.position = collision.gameObject.transform.position;
+            gameObject.transform.position = collision.gameObject.transform.position;
             GetComponent<CircleCollider2D>().enabled = false;
             collision.gameObject.GetComponent<Movement>().ItemHeld = gameObject;
             giveEffect(collision.gameObject);
+            playergb = collision.gameObject;
             // movementSpeed *=3;
             // Destroy(gameObject);
         }
@@ -84,13 +86,16 @@ public class DonutStar : item
         {
             isThrown = false;
         }
+        if (collision.gameObject.CompareTag("Enemy Body")){
+            Destroy(collision.gameObject);
+            Destroy(gameObject);
+        }
     }
 
      IEnumerator returnHitbox()
     {
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.1f);
         GetComponent<CircleCollider2D>().enabled = true;
-
     }
 
 }

@@ -5,7 +5,7 @@ using System;
 
 public class Movement : MonoBehaviour
 {
-    Rigidbody2D rb;
+    public Rigidbody2D rb;
 
     public GameObject ItemHeld;
 
@@ -42,7 +42,6 @@ public class Movement : MonoBehaviour
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
         rb.velocity = new Vector2(horizontalInput * movementSpeed, rb.velocity.y);
-
         if (Input.GetButtonDown("Jump") && jumps > 0)
         {
             Jump();
