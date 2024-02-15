@@ -37,48 +37,60 @@ public class Movement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
         rb.velocity = new Vector2(0, rb.velocity.y);
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
-        rb.velocity = new Vector2(horizontalInput*movementSpeed, rb.velocity.y);
+        rb.velocity = new Vector2(horizontalInput * movementSpeed, rb.velocity.y);
 
-        if (Input.GetButtonDown("Jump") &&  jumps > 0)
+        if (Input.GetButtonDown("Jump") && jumps > 0)
         {
             Jump();
             jumps--;
         }
 
-        if(isGrounded()){
+        if (isGrounded())
+        {
             jumps = maxExtraJumps;
         }
 
-          if(Input.GetButtonDown("Fire1") && ItemHeld != null){
-            print("HI");
+        if (Input.GetButtonDown("Fire1") && ItemHeld != null)
+        {
             StartCoroutine(eatItem());
-            }
-    }
+        }
 
-    void Jump(){
-        rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-    }
-    bool isGrounded()
-    {
-        return Physics2D.OverlapCircle(groundCheck.position, 0.1f, ground);
-    }
-
-    IEnumerator eatItem(){
-        ItemHeld.GetComponent<SpriteRenderer>().enabled = false;
-        ItemHeld.SendMessage("removeEffect", gameObject);
-        ItemHeld.SendMessage("giveSuperEffect", gameObject);
-        yield return new WaitForSeconds(5);
-        ItemHeld.SendMessage("removeSuperEffect", gameObject);
-        Destroy(ItemHeld);
-        ItemHeld = null;
-        
-    }
+        if (Input.GetButtonDown("Fire3") && ItemHeld != null)
+        {
+            ItemHeld.SendMessage("Throw", gameObject);
+            ItemHeld.SendMessage("removeEffect", gameObject);
 
 
- 
+        }
+
+        void Jump()
+        {
+            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+        }
+        bool isGrounded()
+        {
+            return Physics2D.OverlapCircle(groundCheck.position, 0.1f, ground);
+        }
+
+        IEnumerator eatItem()
+        {
+            ItemHeld.GetComponent<SpriteRenderer>().enabled = false;
+            ItemHeld.SendMessage("removeEffect", gameObject);
+            ItemHeld.SendMessage("giveSuperEffect", gameObject);
+            yield return new WaitForSeconds(5);
+            ItemHeld.SendMessage("removeSuperEffect", gameObject);
+            Destroy(ItemHeld);
+            ItemHeld = null;
+            print("hi");
+
+        }
+
+
+
+    }
 }
 
