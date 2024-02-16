@@ -9,17 +9,19 @@ public class Movement : MonoBehaviour
 
     public GameObject ItemHeld;
 
+    public float ItemHeldTime;
+
     [SerializeField] Transform groundCheck;
 
     [SerializeField] LayerMask ground;
 
-    [SerializeField] int maxExtraJumps = 0;
+    [SerializeField] public int maxExtraJumps = 0;
 
-    [SerializeField] float sprintSpeed = 1f;
+    [SerializeField] public float sprintSpeed = 1f;
 
     [SerializeField] public float movementSpeed = 3f;
 
-    [SerializeField] float jumpForce = 100f;
+    [SerializeField] public float jumpForce = 100f;
     
     int jumps;
     // Start is called before the first frame update
@@ -72,13 +74,15 @@ public class Movement : MonoBehaviour
 
         IEnumerator eatItem()
         {
+            ItemHeld.SendMessage("getDuration", gameObject);
             ItemHeld.GetComponent<SpriteRenderer>().enabled = false;
             ItemHeld.SendMessage("removeEffect", gameObject);
             ItemHeld.SendMessage("giveSuperEffect", gameObject);
-            yield return new WaitForSeconds(5);
-            ItemHeld.SendMessage("removeSuperEffect", gameObject);
-            Destroy(ItemHeld);
+            GameObject ItemAte = ItemHeld;
             ItemHeld = null;
+            yield return new WaitForSeconds(ItemHeldTime);
+            ItemAte.SendMessage("removeSuperEffect", gameObject);
+            Destroy(ItemHeld);
             print("hi");
 
         }

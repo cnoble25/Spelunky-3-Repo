@@ -14,6 +14,7 @@ public class DonutStar : item
     {
         rb = GetComponent<Rigidbody2D>();
         rb.isKinematic = true;
+        duration = 5;
     }
     private void Update()
     {
@@ -72,17 +73,25 @@ public class DonutStar : item
         Debug.Log(collision);
         if (collision.gameObject.CompareTag("player"))
         {
-            // StartCoroutine(TempSpeedBuff(collision.gameObject));
-            gameObject.transform.SetParent(collision.transform);
-            gameObject.transform.position = collision.gameObject.transform.position;
-            GetComponent<CircleCollider2D>().enabled = false;
-            collision.gameObject.GetComponent<Movement>().ItemHeld = gameObject;
-            giveEffect(collision.gameObject);
-            playergb = collision.gameObject;
-            // movementSpeed *=3;
-            // Destroy(gameObject);
+            if (collision.gameObject.GetComponent<Movement>().ItemHeld == null)
+            {
+                // StartCoroutine(TempSpeedBuff(collision.gameObject));
+                gameObject.transform.SetParent(collision.transform);
+                gameObject.transform.position = collision.gameObject.transform.position;
+                GetComponent<CircleCollider2D>().enabled = false;
+                collision.gameObject.GetComponent<Movement>().ItemHeld = gameObject;
+                giveEffect(collision.gameObject);
+                playergb = collision.gameObject;
+                // movementSpeed *=3;
+                // Destroy(gameObject);
+            }
+            else
+            {
+
+            }
         }
-        if (!(collision.gameObject.CompareTag("player")))
+
+            if (!(collision.gameObject.CompareTag("player")))
         {
             isThrown = false;
         }
@@ -100,5 +109,7 @@ public class DonutStar : item
         yield return new WaitForSeconds(0.1f);
         GetComponent<CircleCollider2D>().enabled = true;
     }
+
+    
 
 }

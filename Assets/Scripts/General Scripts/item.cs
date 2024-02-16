@@ -6,10 +6,13 @@ public class item : MonoBehaviour
 {
     public Rigidbody2D rb;
 
+    public float duration;
+
     void Start(){
         rb = GetComponent<Rigidbody2D>();
     }
-    public void giveEffect(GameObject gb){
+    public void giveEffect(GameObject gb)
+    {
 
     }
 
@@ -25,5 +28,13 @@ public class item : MonoBehaviour
 
     }
 
+    public void Throw(GameObject gb)
+    {
 
+    }
+
+    public void getDuration(GameObject gb)
+    {
+        gb.GetComponent<Movement>().ItemHeldTime = duration;
+    }
 }
