@@ -20,13 +20,8 @@ public class Movement : MonoBehaviour
     [SerializeField] public float movementSpeed = 3f;
 
     [SerializeField] float jumpForce = 100f;
-
-
+    
     int jumps;
-
-
-
-
     // Start is called before the first frame update
     void Start()
     {
@@ -87,9 +82,6 @@ public class Movement : MonoBehaviour
             print("hi");
 
         }
-
-
-
     }
 }
 

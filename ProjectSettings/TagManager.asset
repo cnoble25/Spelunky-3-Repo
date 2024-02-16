@@ -7,6 +7,8 @@ TagManager:
   - Movement Faster
   - player
   - Enemy Body
+  - Item
+  - Platform
   layers:
   - Default
   - TransparentFX

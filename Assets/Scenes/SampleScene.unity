@@ -139,7 +139,7 @@ GameObject:
   - component: {fileID: 34695447}
   m_Layer: 0
   m_Name: Test Item
-  m_TagString: Movement Faster
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -454,6 +454,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6291f606d0275a94b84300640ebba19f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rb: {fileID: 0}
   ItemHeld: {fileID: 0}
   groundCheck: {fileID: 1139204936}
   ground:
@@ -573,7 +574,7 @@ GameObject:
   - component: {fileID: 548749522}
   m_Layer: 6
   m_Name: platform
-  m_TagString: Untagged
+  m_TagString: Platform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

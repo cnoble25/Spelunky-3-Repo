@@ -35,7 +35,7 @@ public class DonutStar : item
         }
         else
         {
-            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y);
+            rb.velocity = new Vector2(0, rb.velocity.y);
             rb.isKinematic = true;
             velocityX = 0;
         }
@@ -89,6 +89,9 @@ public class DonutStar : item
         if (collision.gameObject.CompareTag("Enemy Body")){
             Destroy(collision.gameObject);
             Destroy(gameObject);
+        }
+        if (collision.gameObject.CompareTag("Platform")){
+            isThrown = false;
         }
     }
 
