@@ -64,26 +64,29 @@ public class DonutStar : item
 
      new void Throw(GameObject gb)
     {
+        base.Throw(gb);
         isThrown = true;
+        removeEffect(gb);
         StartCoroutine(returnHitbox());
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
+    new void bindToPlayer(GameObject gb){
+         if(gb.GetComponent<Movement>().ItemHeld == null){
+        base.bindToPlayer(gb);
+        giveEffect(gb);
+        playergb = gb;
+         }
+
+    }
+
+    void OnTriggerEnter2D(Collider2D collision)
     {
         Debug.Log(collision);
         if (collision.gameObject.CompareTag("player"))
         {
             if (collision.gameObject.GetComponent<Movement>().ItemHeld == null)
             {
-                // StartCoroutine(TempSpeedBuff(collision.gameObject));
-                gameObject.transform.SetParent(collision.transform);
-                gameObject.transform.position = collision.gameObject.transform.position;
-                GetComponent<CircleCollider2D>().enabled = false;
-                collision.gameObject.GetComponent<Movement>().ItemHeld = gameObject;
-                giveEffect(collision.gameObject);
-                playergb = collision.gameObject;
-                // movementSpeed *=3;
-                // Destroy(gameObject);
+                bindToPlayer(collision.gameObject);
             }
             else
             {

@@ -8,6 +8,9 @@ public class item : MonoBehaviour
 
     public float duration;
 
+    // public GameObject playergb;
+
+
     void Start(){
         rb = GetComponent<Rigidbody2D>();
     }
@@ -37,5 +40,17 @@ public class item : MonoBehaviour
     public void getDuration(GameObject gb)
     {
         gb.GetComponent<Movement>().ItemHeldTime = duration;
+    }
+
+    public void bindToPlayer(GameObject gb){
+       
+            // StartCoroutine(TempSpeedBuff(collision.gameObject));
+            gameObject.transform.SetParent(gb.transform);
+            gameObject.transform.position = gb.transform.position;
+            GetComponent<CircleCollider2D>().enabled = false;
+            gb.GetComponent<Movement>().ItemHeld = gameObject;
+            // movementSpeed *=3;
+            // Destroy(gameObject);
+            
     }
 }
