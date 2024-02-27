@@ -73,6 +73,7 @@ public class Beans : item
     new void Throw(GameObject gb)
     {
         isThrown = true;
+        removeEffect(gb);
         StartCoroutine(returnHitbox());
     }
 
@@ -87,6 +88,7 @@ public class Beans : item
         Debug.Log(collision);
         if (collision.gameObject.CompareTag("player"))
         {
+            if(collision.gameObject.GetComponent<Movement>().ItemHeld == null){
             // StartCoroutine(TempSpeedBuff(collision.gameObject));
             gameObject.transform.SetParent(collision.transform);
             gameObject.transform.position = collision.gameObject.transform.position;
@@ -96,6 +98,7 @@ public class Beans : item
             playergb = collision.gameObject;
             // movementSpeed *=3;
             // Destroy(gameObject);
+            }
         }
         if (!(collision.gameObject.CompareTag("player")))
         {
@@ -103,8 +106,10 @@ public class Beans : item
         }
         if (collision.gameObject.CompareTag("Enemy Body"))
         {
+            if(isThrown){
             Destroy(collision.gameObject);
             Destroy(gameObject);
+            }
         }
         if (collision.gameObject.CompareTag("Platform"))
         {

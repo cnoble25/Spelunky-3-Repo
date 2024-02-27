@@ -30,6 +30,7 @@ public class item : MonoBehaviour
 
     public void Throw(GameObject gb)
     {
+        gb.GetComponent<Movement>().ItemHeld = null;
 
     }
 

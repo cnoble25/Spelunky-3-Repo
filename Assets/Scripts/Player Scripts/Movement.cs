@@ -82,7 +82,7 @@ public class Movement : MonoBehaviour
             ItemHeld = null;
             yield return new WaitForSeconds(ItemHeldTime);
             ItemAte.SendMessage("removeSuperEffect", gameObject);
-            Destroy(ItemHeld);
+            Destroy(ItemAte);
             print("hi");
 
         }
