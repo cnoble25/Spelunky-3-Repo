@@ -9,6 +9,8 @@ public class NPCScript : MonoBehaviour
     bool isAngy;
     Rigidbody2D rb;
 
+    public float vision;
+
     [SerializeField] LayerMask player;
 
 
@@ -22,12 +24,14 @@ public class NPCScript : MonoBehaviour
     void Update()
     {
         if(playerInRange()){
-            print("HI");
+            if(Input.GetKeyDown("q")){
+                print("hi");
+            }
         }
         
     }
 
     bool playerInRange(){
-        return Physics2D.OverlapCircle(rb.position, 10f, player);
+        return Physics2D.OverlapCircle(rb.position, vision, player);
     }
 }

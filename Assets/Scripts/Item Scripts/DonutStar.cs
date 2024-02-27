@@ -5,10 +5,7 @@ using UnityEngine;
 public class DonutStar : item
 {
     //Rigidbody2D rb;
-    float velocityX = 0;
-    GameObject playergb;
 
-    bool isThrown = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -36,7 +33,7 @@ public class DonutStar : item
         }
         else
         {
-            rb.velocity = new Vector2(0, rb.velocity.y);
+            rb.velocity = new Vector2(0, 0);
             rb.isKinematic = true;
             velocityX = 0;
         }
@@ -69,6 +66,8 @@ public class DonutStar : item
         removeEffect(gb);
         StartCoroutine(returnHitbox());
     }
+
+
 
     new void bindToPlayer(GameObject gb){
          if(gb.GetComponent<Movement>().ItemHeld == null){

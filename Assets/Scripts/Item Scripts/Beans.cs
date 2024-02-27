@@ -8,11 +8,8 @@ public class Beans : item
 
     // float duration;
 
-    GameObject playergb;
     
-    float velocityX = 0;
 
-    bool isThrown = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,33 +21,7 @@ public class Beans : item
     // Update is called once per frame
     void Update()
     {
-        if (isThrown)
-        {
-            transform.parent = null;
-            rb.isKinematic = false;
-            if (playergb != null)
-            {
-                if (velocityX == 0)
-                {
-                    velocityX = playergb.GetComponent<Movement>().rb.velocity.x;
-                }
-                if (velocityX >= 0)
-                {
-                    rb.velocity = new Vector2(15f, rb.velocity.y);
-                }
-                else
-                {
-                    rb.velocity = new Vector2(-15f, rb.velocity.y);
-                }
-                print(playergb.GetComponent<Movement>().rb.velocity);
-            }
-        }
-        else
-        {
-            rb.velocity = new Vector2(0, rb.velocity.y);
-            rb.isKinematic = true;
-            velocityX = 0;
-        }
+        base.throwMovement(throwSpeed);
     }
 
     new void giveEffect(GameObject gb)

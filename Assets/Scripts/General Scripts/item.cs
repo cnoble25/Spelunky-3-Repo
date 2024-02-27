@@ -6,7 +6,13 @@ public class item : MonoBehaviour
 {
     public Rigidbody2D rb;
 
+    public bool isThrown;
+
     public float duration;
+    public float velocityX = 0;
+    public GameObject playergb;
+
+    public float throwSpeed;
 
     // public GameObject playergb;
 
@@ -40,6 +46,31 @@ public class item : MonoBehaviour
     public void getDuration(GameObject gb)
     {
         gb.GetComponent<Movement>().ItemHeldTime = duration;
+    }
+
+    public void throwMovement(float speed){
+        if (isThrown)
+        {
+            transform.parent = null;
+            rb.isKinematic = false;
+            if(playergb != null){
+            if(velocityX == 0){
+                velocityX = playergb.GetComponent<Movement>().rb.velocity.x;
+            }
+            if(velocityX >= 0){
+            rb.velocity = new Vector2(speed, rb.velocity.y);
+            }else{
+            rb.velocity = new Vector2(-speed, rb.velocity.y);
+            }
+            print(playergb.GetComponent<Movement>().rb.velocity);
+            }
+        }
+        else
+        {
+            rb.velocity = new Vector2(0, 0);
+            rb.isKinematic = true;
+            velocityX = 0;
+        }
     }
 
     public void bindToPlayer(GameObject gb){
