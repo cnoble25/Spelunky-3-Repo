@@ -140,12 +140,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e290bf417c748bf429b453bd3543083f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 0}
-  isThrown: 0
-  duration: 0
-  velocityX: 0
-  playergb: {fileID: 0}
-  throwSpeed: 0
+  duration: 5
+  throwSpeed: 15
 --- !u!1 &109075693
 GameObject:
   m_ObjectHideFlags: 0
@@ -597,11 +593,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24e224e299c6d2f4fb52d7564f8cbba3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 0}
-  isThrown: 0
-  duration: 0
-  velocityX: 0
-  playergb: {fileID: 0}
+  duration: 20
   throwSpeed: 15
 --- !u!1 &610606607
 GameObject:

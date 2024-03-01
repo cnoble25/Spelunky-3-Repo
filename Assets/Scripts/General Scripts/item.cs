@@ -2,45 +2,43 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class item : MonoBehaviour
+public abstract class item : MonoBehaviour
 {
-    public Rigidbody2D rb;
+    protected Rigidbody2D rb;
 
-    public bool isThrown;
+    protected bool isThrown;
 
-    public float duration;
-    public float velocityX = 0;
-    public GameObject playergb;
+    [SerializeField] protected float duration;
 
-    public float throwSpeed;
+    protected float velocityX;
+    protected GameObject playergb;
+
+    [SerializeField] protected float throwSpeed;
 
     // public GameObject playergb;
 
 
-    void Start(){
-        rb = GetComponent<Rigidbody2D>();
-    }
-    public void giveEffect(GameObject gb)
+    void Start()
     {
-
+        rb = GetComponent<Rigidbody2D>();
+        rb.isKinematic = true;
+        velocityX = 0;
     }
 
-    public void removeEffect(GameObject gb){
-  
+    void Update()
+    {
+        throwMovement(throwSpeed);
     }
+    public abstract void giveEffect(GameObject gb);
+    public abstract void removeEffect(GameObject gb);
 
-   public  void giveSuperEffect(GameObject gb){
+    public abstract void giveSuperEffect(GameObject gb);
 
-    }
-
-    public void removeSuperEffect(GameObject gb){
-
-    }
+    public abstract void removeSuperEffect(GameObject gb);
 
     public void Throw(GameObject gb)
     {
         gb.GetComponent<Movement>().ItemHeld = null;
-
     }
 
     public void getDuration(GameObject gb)
@@ -48,21 +46,24 @@ public class item : MonoBehaviour
         gb.GetComponent<Movement>().ItemHeldTime = duration;
     }
 
-    public void throwMovement(float speed){
+    public void throwMovement(float speed)
+    {
         if (isThrown)
         {
+            print("hi");
             transform.parent = null;
             rb.isKinematic = false;
-            if(playergb != null){
-            if(velocityX == 0){
-                velocityX = playergb.GetComponent<Movement>().rb.velocity.x;
-            }
-            if(velocityX >= 0){
-            rb.velocity = new Vector2(speed, rb.velocity.y);
-            }else{
-            rb.velocity = new Vector2(-speed, rb.velocity.y);
-            }
-            print(playergb.GetComponent<Movement>().rb.velocity);
+            if (playergb != null)
+            {
+                if (playergb.GetComponent<Movement>().directionOfPlayer)
+                {
+                    rb.velocity = new Vector2(speed, rb.velocity.y);
+                }
+                else
+                {
+                    rb.velocity = new Vector2(-speed, rb.velocity.y);
+                }
+                print(playergb.GetComponent<Movement>().rb.velocity);
             }
         }
         else
@@ -73,15 +74,48 @@ public class item : MonoBehaviour
         }
     }
 
-    public void bindToPlayer(GameObject gb){
-       
-            // StartCoroutine(TempSpeedBuff(collision.gameObject));
+    public void bindToPlayer(GameObject gb)
+    {
+        if (gb.GetComponent<Movement>().ItemHeld == null)
+        {
             gameObject.transform.SetParent(gb.transform);
             gameObject.transform.position = gb.transform.position;
             GetComponent<CircleCollider2D>().enabled = false;
             gb.GetComponent<Movement>().ItemHeld = gameObject;
-            // movementSpeed *=3;
-            // Destroy(gameObject);
-            
+            giveEffect(gb);
+            playergb = gb;
+        }
+
+    }
+
+    public IEnumerator returnHitbox()
+    {
+        yield return new WaitForSeconds(0.1f);
+        GetComponent<CircleCollider2D>().enabled = true;
+    }
+
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+        Debug.Log(collision);
+        if (collision.gameObject.CompareTag("player") && !isThrown)
+        {
+            bindToPlayer(collision.gameObject);
+        }
+        if (collision.gameObject.CompareTag("Enemy Body"))
+        {
+            if (isThrown)
+            {
+                Destroy(collision.gameObject);
+                Destroy(gameObject);
+            }
+        }
+        if (collision.gameObject.CompareTag("Platform"))
+        {
+            isThrown = false;
+        }
+        if (!(collision.gameObject.CompareTag("player")))
+        {
+            isThrown = false;
+        }
     }
 }
