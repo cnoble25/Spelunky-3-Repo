@@ -2,26 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DonutStar : item
+public class Carrot : item
 {
+
     public override void giveEffect(GameObject gb)
     {
-        gb.GetComponent<Movement>().movementSpeed *= 3;
+
     }
 
     public override void removeEffect(GameObject gb)
     {
-        gb.GetComponent<Movement>().movementSpeed /= 3;
+
     }
 
     public override void giveSuperEffect(GameObject gb)
     {
-        gb.GetComponent<Movement>().movementSpeed *= 6;
+        gb.GetComponent<Movement>().MainCamera.orthographicSize *= 1.5f;
+
     }
 
     public override void removeSuperEffect(GameObject gb)
     {
-        gb.GetComponent<Movement>().movementSpeed /= 6;
+        gb.GetComponent<Movement>().MainCamera.orthographicSize /= 1.5f;
     }
 
     new void Throw(GameObject gb)
@@ -31,4 +33,6 @@ public class DonutStar : item
         removeEffect(gb);
         StartCoroutine(returnHitbox());
     }
+
+
 }

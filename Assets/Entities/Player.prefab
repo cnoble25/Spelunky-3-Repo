@@ -182,6 +182,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 0}
   ItemHeld: {fileID: 0}
+  MainCamera: {fileID: 2068976764868780607}
   ItemHeldTime: 0
   groundCheck: {fileID: 2068976763343026440}
   ground:
@@ -191,6 +192,7 @@ MonoBehaviour:
   sprintSpeed: 1
   movementSpeed: 6
   jumpForce: 20
+  directionOfPlayer: 0
 --- !u!114 &2068976764818366154
 MonoBehaviour:
   m_ObjectHideFlags: 0

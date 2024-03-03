@@ -8,6 +8,8 @@ public class Movement : MonoBehaviour
     public Rigidbody2D rb;
 
     public GameObject ItemHeld;
+    
+    public Camera MainCamera;
 
     public float ItemHeldTime;
 
@@ -15,13 +17,13 @@ public class Movement : MonoBehaviour
 
     [SerializeField] LayerMask ground;
 
-    [SerializeField] public int maxExtraJumps = 0;
+    public int maxExtraJumps = 0;
 
-    [SerializeField] public float sprintSpeed = 1f;
+    public float sprintSpeed = 1f;
 
-    [SerializeField] public float movementSpeed = 3f;
+    public float movementSpeed = 3f;
 
-    [SerializeField] public float jumpForce = 100f;
+    public float jumpForce = 100f;
 
     int jumps;
     //right is true left is false
