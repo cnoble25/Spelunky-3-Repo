@@ -11,6 +11,7 @@ public abstract class item : MonoBehaviour
     [SerializeField] protected float duration;
 
     protected float velocityX;
+
     protected GameObject playergb;
 
     [SerializeField] protected float throwSpeed;
@@ -105,8 +106,7 @@ public abstract class item : MonoBehaviour
         {
             if (isThrown)
             {
-                Destroy(collision.gameObject);
-                Destroy(gameObject);
+                HitEnemy(collision.gameObject);
             }
         }
         if (collision.gameObject.CompareTag("Platform"))
@@ -117,5 +117,11 @@ public abstract class item : MonoBehaviour
         {
             isThrown = false;
         }
+    }
+
+    public void HitEnemy(GameObject gb)
+    {
+        Destroy(gb);
+        Destroy(gameObject);
     }
 }

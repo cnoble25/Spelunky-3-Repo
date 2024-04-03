@@ -6,11 +6,18 @@ using UnityEngine.SceneManagement;
 
 public class PlayerLife : MonoBehaviour
 {
-  private void OnCollisionEnter2D(Collision2D collision) 
+    float health = 100;
+
+    bool canBeHit = true;
+
+    public float collisionDamage;
+    private void OnCollisionEnter2D(Collision2D collision) 
     {
         if (collision.gameObject.CompareTag("Enemy Body"))
         {
-            Die();
+            collision.gameObject.SendMessage("getDamage",  this);
+            StartCoroutine(GetHit(collisionDamage));
+
         }
     }
 
@@ -20,6 +27,26 @@ public class PlayerLife : MonoBehaviour
         GetComponent<Rigidbody2D>().isKinematic = true;
         GetComponent<Movement>().enabled = false;
         Invoke(nameof(ReloadLevel), 1.3f);
+    }
+
+    IEnumerator GetHit(float damage)
+    {
+        
+        if (canBeHit)
+        {
+           
+            health -= damage;
+            canBeHit = false;
+            if(health <= 0)
+            {
+                Die();
+            }
+            print(health);
+            yield return new WaitForSeconds(1);
+            canBeHit = true;
+        }
+        
+
     }
 
     void ReloadLevel()
